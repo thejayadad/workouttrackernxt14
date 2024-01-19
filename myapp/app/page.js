@@ -27,6 +27,7 @@ export default function Home() {
             <span>Log in</span> ARROW
           </Link>
         </div>
+        
       </div>
     </main>
   );
