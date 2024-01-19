@@ -19,8 +19,28 @@ const WorkoutPage = async ({params}) => {
             />
                 <input type='hidden' name='workoutId' defaultValue={workout._id.toString()} />
             <input
+            type='date'
+                name='date'
+                placeholder='Date....'
+            />
+                <input
+                type='number'
                 name='duration'
                 placeholder='Duration....'
+            />
+                <input
+                type='number'
+                name='distance'
+                placeholder='Distance...'
+            />
+                <input
+                type='number'
+                name='calories'
+                placeholder='Calories....'
+            />
+                <textarea
+                name='notes'
+                placeholder='Notes...'
             />
             <button type='submit'>Add Exercise</button>
         </form>
