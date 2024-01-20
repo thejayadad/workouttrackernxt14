@@ -11,9 +11,11 @@ module.exports = {
   ],
   theme: {
     extend: {
-      primary: '#f29e23',
-      secondary: '#eb7525',
-      grey: '#404041'
+        colors: {
+          primary: '#f29e23',
+          secondary: '#eb7525',
+          grey: '#404041'
+        }
     },
   },
   darkMode: "class",

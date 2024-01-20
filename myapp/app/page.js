@@ -6,13 +6,13 @@ import {FiArrowRight} from "react-icons/fi"
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-purple-100 p-4 md:h-52">
+      <div className="flex  h-22 shrink-0 items-center rounded-lg bg-grey p-4 md:h-52">
         <Image
           src="/logo.png"
           width={200}
           height={150}
           alt="logo"
-          className="flex z-10"
+          className="flex z-10 mt-6"
           style={{zIndex: '100'}}
 
         />
@@ -31,7 +31,7 @@ export default function Home() {
           </p>
           <Link
             href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-primary px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
+            className="flex items-center gap-5 self-start rounded-lg bg-secondary px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-primary md:text-base"
           >
             <span>Log in</span> <FiArrowRight />
           </Link>
@@ -52,7 +52,11 @@ export default function Home() {
             alt="Hero"
           />
         </div>
+   
       </div>
+      <div className="flex justify-center h-22 shrink-0 items-center rounded-lg bg-grey p-4 md:h-52">
+          <h1 className="text-center">ByThejayadad</h1>
+        </div>
     </main>
   );
 }
