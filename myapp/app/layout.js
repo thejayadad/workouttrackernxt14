@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/SessionProvider";
 import NextProviderUi from "@/lib/NextProviderUi";
+import { NextThemeProvider } from "@/lib/NextThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,11 +13,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en"
+    className={(inter.className, "dark")}
+    style={{
+      colorScheme: "dark",
+    }}
+    >
+      <body>
         <AuthProvider>
           <NextProviderUi>
+          <NextThemeProvider>
           {children}
+          </NextThemeProvider>
           </NextProviderUi>
         </AuthProvider>
       </body>
