@@ -1,26 +1,48 @@
-import { getWorkouts } from '@/lib/data'
-import React from 'react'
-import {Accordion, AccordionItem} from "@nextui-org/react";
-import According from '@/components/According/According';
+'use client'
+import { getExercises, getWorkouts } from '@/lib/data';
+import React, { useEffect, useState } from 'react';
 
+const WorkoutPage = () => {
+  const [workoutsWithExercises, setWorkoutsWithExercises] = useState([]);
 
-const WorkoutPage = async () => {
-  const workouts = await getWorkouts()
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const workouts = await getWorkouts();
+        const workoutsWithExercisesPromises = workouts.map(async (workout) => {
+          const exercises = await getExercises(workout.id);
+          return {
+            _id: workout._id.toString(),
+            title: workout.title,
+            exercises,
+          };
+        });
+
+        const resolvedWorkoutsWithExercises = await Promise.all(workoutsWithExercisesPromises);
+        setWorkoutsWithExercises(resolvedWorkoutsWithExercises);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setWorkoutsWithExercises([]);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <section className='px-4 py-8'>
+    <div>
+      {workoutsWithExercises.map(({ _id, title, exercises }) => (
+        <div key={_id}>
+          <span>{title}</span>
+          {exercises.map((exercise) => (
+            <div key={exercise._id}>
+              <span>{exercise.name}</span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
 
-      
-      {
-        workouts.map((workout) => (
-          <div className='text-grey grid grid-cols-1 md:grid-cols-2' key={workout.id}>
-            <According title={workout.title} id={workout.id} />
-          </div>
-        ))
-
-      }
-    </section>
-  )
-}
-
-export default WorkoutPage 
+export default WorkoutPage;
