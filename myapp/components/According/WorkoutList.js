@@ -35,15 +35,12 @@ const WorkoutList = () => {
       <Accordion variant="splitted" className="mb-4">
         {workouts.map((workout) => (
           <AccordionItem key={workout._id} title={workout.title}>
-            {/* Nested Accordion for Exercises */}
             <Accordion variant="splitted" className="mb-2">
               {workout.exercises.map((exercise) => (
                 <AccordionItem key={exercise._id} title={exercise.name}>
-                  {/* Example content for Exercise AccordionItem */}
                   <div>
                     <p>Exercise Name: {exercise.name}</p>
                     <p>Exercise Duration: {exercise.duration}</p>
-                    {/* Add more exercise details as needed */}
                   </div>
                 </AccordionItem>
               ))}
