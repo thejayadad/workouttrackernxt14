@@ -1,48 +1,48 @@
-'use client'
-import { getExercises, getWorkouts } from '@/lib/data';
-import React, { useEffect, useState } from 'react';
 
-const WorkoutPage = () => {
-  const [workoutsWithExercises, setWorkoutsWithExercises] = useState([]);
+ import { getExercises, getWorkouts } from '@/lib/data'
+  import React from 'react'
+  import {Accordion, AccordionItem} from "@nextui-org/react";
+  import According from '@/components/According/According';
+import Exercise from '@/components/According/Exercise';
+import WorkoutList from '@/components/According/WorkoutList';
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const workouts = await getWorkouts();
-        const workoutsWithExercisesPromises = workouts.map(async (workout) => {
-          const exercises = await getExercises(workout.id);
-          return {
-            _id: workout._id.toString(),
-            title: workout.title,
-            exercises,
-          };
-        });
 
-        const resolvedWorkoutsWithExercises = await Promise.all(workoutsWithExercisesPromises);
-        setWorkoutsWithExercises(resolvedWorkoutsWithExercises);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setWorkoutsWithExercises([]);
-      }
-    };
+  const WorkoutPage = async () => {
+    const workouts = await getWorkouts()
+    return (
+      <section className='px-4 py-8'>
+        <div>
+      <WorkoutList />
 
-    fetchData();
-  }, []);
-
-  return (
-    <div>
-      {workoutsWithExercises.map(({ _id, title, exercises }) => (
-        <div key={_id}>
-          <span>{title}</span>
-          {exercises.map((exercise) => (
-            <div key={exercise._id}>
+ {/* {workouts.map(async (workout) => {
+const exercises = await getExercises(workout.id);
+   return (
+       <div className='text-grey grid grid-cols-1 md:grid-cols-2'>
+        
+        <span>{workout.title}</span>
+        {
+          exercises.map((exercise) => (
+            <div key={exercise.id}>
               <span>{exercise.name}</span>
             </div>
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-};
+          ))
+        }
+       </div>
+     );
+   })}  */}
+           </div>
+      </section>
+    )
+  }
 
-export default WorkoutPage;
+  export default WorkoutPage 
+
+
+  // {workouts.map(async (workout) => {
+  //   const exercises = await getExercises(workout.id);
+  //   return (
+  //     <div className='text-grey grid grid-cols-1 md:grid-cols-2'>
+  //       <According  key={workout.id} title={workout.title} id={workout.id} exercises={exercises} />
+  //     </div>
+  //   );
+  // })}
